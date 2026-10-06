@@ -28,40 +28,33 @@ export default async function HomePage() {
       <main>
 
         {/* ─── HERO ─────────────────────────────────────────────────────── */}
-        <section className="relative overflow-hidden bg-stone-900 min-h-[90svh] flex items-center">
-          {/* Warm tinted background */}
-          <div className="absolute inset-0 bg-gradient-to-br from-stone-900 via-stone-800 to-amber-950/40" />
-
-          {/* Subtle grid texture */}
-          <div className="absolute inset-0 opacity-[0.03]" style={{
-            backgroundImage: "linear-gradient(rgba(255,255,255,0.4) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.4) 1px, transparent 1px)",
-            backgroundSize: "64px 64px"
+        <section className="relative overflow-hidden border-b border-stone-200" style={{ backgroundColor: "#F7F4EF" }}>
+          {/* Fine dotted texture */}
+          <div className="absolute inset-0 opacity-[0.04]" style={{
+            backgroundImage: "radial-gradient(circle at 1px 1px, rgba(28,25,23,0.6) 1px, transparent 0)",
+            backgroundSize: "26px 26px"
           }} />
 
-          <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 py-24 w-full">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+          <div className="relative max-w-7xl mx-auto px-4 sm:px-6 py-16 lg:py-24 w-full">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
 
               {/* Text */}
-              <div className="space-y-8">
-                <div>
-                  <Badge variant="brand" className="mb-5 text-[10px]">
-                    <Sparkles className="h-3 w-3 mr-1" /> New Arrivals
-                  </Badge>
-                  <h1 className="font-serif text-5xl sm:text-6xl lg:text-7xl font-bold text-white leading-[0.95] tracking-tight">
-                    Beauty That<br />
-                    <span className="text-gold">Defines</span><br />
-                    You
-                  </h1>
-                </div>
+              <div className="space-y-7">
+                <p className="eyebrow">Curated Luxury · Nairobi</p>
+                <h1 className="font-serif text-5xl sm:text-6xl lg:text-7xl font-semibold text-stone-900 leading-[0.98] tracking-tight">
+                  Fragrance that<br />
+                  <span className="text-gold">lingers</span>, beauty<br />
+                  that defines you
+                </h1>
 
-                <p className="text-stone-400 text-lg font-light leading-relaxed max-w-md">
-                  Curated luxury cosmetics and designer fragrances — sourced from the world&apos;s finest makers and delivered across Kenya.
+                <p className="text-stone-600 text-lg font-light leading-relaxed max-w-md">
+                  Designer perfumes and premium cosmetics — authenticated, hand-picked, and delivered across Kenya. Ordered in a single tap.
                 </p>
 
                 <div className="flex flex-wrap gap-3">
                   <Button variant="brand" size="lg" asChild>
                     <Link href="/shop">
-                      Explore Collection <ArrowRight className="h-4 w-4" />
+                      Explore the collection <ArrowRight className="h-4 w-4" />
                     </Link>
                   </Button>
                   <Button variant="whatsapp" size="lg" asChild>
@@ -75,55 +68,51 @@ export default async function HomePage() {
                 </div>
 
                 {/* Trust strip */}
-                <div className="flex items-center gap-6 pt-4 border-t border-stone-700/50">
+                <div className="flex flex-wrap items-center gap-x-8 gap-y-3 pt-6 border-t border-stone-200">
                   {[
                     { icon: Shield, label: "100% Authentic" },
                     { icon: Truck, label: "48h Nairobi Delivery" },
                     { icon: Sparkles, label: "Premium Curated" },
                   ].map(({ icon: Icon, label }) => (
-                    <div key={label} className="flex items-center gap-2 text-stone-400 text-xs">
-                      <Icon className="h-3.5 w-3.5 text-amber-500/70" />
+                    <div key={label} className="flex items-center gap-2 text-stone-500 text-xs">
+                      <Icon className="h-3.5 w-3.5" style={{ color: "var(--gold-dark)" }} />
                       <span>{label}</span>
                     </div>
                   ))}
                 </div>
               </div>
 
-              {/* Hero product card */}
+              {/* Hero product */}
               {hero && (
-                <div className="relative">
-                  {/* Ambient glow */}
-                  <div className="absolute inset-0 rounded-2xl bg-amber-500/10 blur-3xl scale-110" />
-                  <div className="relative block">
-                    {/* Stretched link covers the card for navigation; the Order button sits above it. */}
-                    <Link href={`/product/${hero.slug}`} aria-label={hero.name} className="absolute inset-0 z-10 rounded-xl" />
-                    <Card className="overflow-hidden border-stone-700/50 bg-stone-800/80 backdrop-blur">
-                      <div className="aspect-[4/3] relative overflow-hidden">
-                        {hero.imageUrl && (
-                          <Image
-                            src={hero.imageUrl}
-                            alt={hero.name}
-                            fill
-                            priority
-                            sizes="(max-width: 1024px) 100vw, 50vw"
-                            className="object-cover transition-transform duration-700 hover:scale-105"
-                          />
-                        )}
-                        <div className="absolute inset-0 bg-gradient-to-t from-stone-900/80 via-transparent to-transparent" />
-                        <div className="absolute bottom-0 left-0 right-0 p-6">
-                          <Badge variant="featured" className="mb-3">Featured</Badge>
-                          <h2 className="font-serif text-2xl font-semibold text-white mb-1">{hero.name}</h2>
-                          <div className="flex items-center justify-between">
-                            <span className="font-semibold text-amber-400 text-lg">{formatPrice(hero.price)}</span>
-                            <Button variant="whatsapp" size="sm" asChild className="relative z-20">
-                              <a href={wa.single(hero.name, hero.price)} target="_blank" rel="noopener noreferrer">
-                                Order
-                              </a>
-                            </Button>
-                          </div>
-                        </div>
+                <div className="relative lift">
+                  <Link href={`/product/${hero.slug}`} aria-label={hero.name} className="absolute inset-0 z-10 rounded-2xl" />
+                  <div className="relative overflow-hidden rounded-2xl border border-stone-200 bg-white shadow-[0_30px_60px_-30px_rgba(28,25,23,0.3)]">
+                    <div className="aspect-[4/5] relative overflow-hidden bg-stone-100">
+                      {hero.imageUrl && (
+                        <Image
+                          src={hero.imageUrl}
+                          alt={hero.name}
+                          fill
+                          priority
+                          sizes="(max-width: 1024px) 100vw, 50vw"
+                          className="object-cover transition-transform duration-700 hover:scale-105"
+                        />
+                      )}
+                      <div className="absolute top-4 left-4">
+                        <Badge variant="featured">Featured</Badge>
                       </div>
-                    </Card>
+                    </div>
+                    <div className="flex items-center justify-between gap-3 p-5">
+                      <div className="min-w-0">
+                        <h2 className="font-serif text-lg font-semibold text-stone-900 leading-snug truncate">{hero.name}</h2>
+                        <span className="font-semibold text-stone-900">{formatPrice(hero.price)}</span>
+                      </div>
+                      <Button variant="brand" size="sm" asChild className="relative z-20 shrink-0">
+                        <a href={wa.single(hero.name, hero.price)} target="_blank" rel="noopener noreferrer">
+                          Order
+                        </a>
+                      </Button>
+                    </div>
                   </div>
                 </div>
               )}
@@ -171,17 +160,19 @@ export default async function HomePage() {
 
             <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
               {[
-                { label: "Perfumes — Men",    href: "/shop?category=PERFUME_MEN",    emoji: "🖤", bg: "bg-slate-900", text: "text-white" },
-                { label: "Perfumes — Women",  href: "/shop?category=PERFUME_WOMEN",  emoji: "🌹", bg: "bg-rose-900",  text: "text-white" },
-                { label: "Unisex",            href: "/shop?category=PERFUME_UNISEX", emoji: "✨", bg: "bg-amber-700", text: "text-white" },
-                { label: "Skincare",          href: "/shop?category=SKINCARE",       emoji: "💧", bg: "bg-sky-700",   text: "text-white" },
-                { label: "Makeup",            href: "/shop?category=MAKEUP",         emoji: "💄", bg: "bg-pink-700",  text: "text-white" },
-                { label: "Haircare",          href: "/shop?category=HAIRCARE",       emoji: "🌿", bg: "bg-emerald-800", text: "text-white" },
+                { label: "Perfumes — Men",   href: "/shop?category=PERFUME_MEN",    emoji: "🖤" },
+                { label: "Perfumes — Women", href: "/shop?category=PERFUME_WOMEN",  emoji: "🌹" },
+                { label: "Unisex",           href: "/shop?category=PERFUME_UNISEX", emoji: "✨" },
+                { label: "Skincare",         href: "/shop?category=SKINCARE",       emoji: "💧" },
+                { label: "Makeup",           href: "/shop?category=MAKEUP",         emoji: "💄" },
+                { label: "Haircare",         href: "/shop?category=HAIRCARE",       emoji: "🌿" },
               ].map(cat => (
                 <Link key={cat.href} href={cat.href}
-                  className={`${cat.bg} ${cat.text} rounded-xl p-5 text-center hover:opacity-90 hover:scale-[1.02] transition-all duration-200 cursor-pointer`}>
-                  <div className="text-3xl mb-2">{cat.emoji}</div>
-                  <div className="text-xs font-medium leading-tight">{cat.label}</div>
+                  className="group lift rounded-xl border border-stone-200 bg-white p-5 text-center hover:border-[color:var(--gold)]">
+                  <div className="mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-full bg-stone-50 text-2xl transition-colors group-hover:bg-amber-50">
+                    {cat.emoji}
+                  </div>
+                  <div className="text-xs font-medium leading-tight text-stone-700">{cat.label}</div>
                 </Link>
               ))}
             </div>

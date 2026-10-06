@@ -33,7 +33,8 @@
   * { @apply border-border; }
   
   body {
-    @apply bg-stone-50 text-stone-900 antialiased;
+    @apply text-stone-900 antialiased;
+    background-color: #F7F4EF; /* warm paper — luxury-retail base */
     font-feature-settings: "rlig" 1, "calt" 1;
   }
 
@@ -67,6 +68,22 @@
   .section-rule {
     @apply w-10 h-px bg-amber-400/60;
   }
+
+  /* Luxury-retail helpers */
+  .eyebrow {
+    @apply text-[11px] uppercase tracking-[0.3em] font-medium;
+    color: var(--gold-dark);
+  }
+  .hairline { @apply h-px w-full bg-stone-200; }
+  .lift { transition: transform .45s cubic-bezier(.22,1,.36,1), box-shadow .45s cubic-bezier(.22,1,.36,1); }
+  .lift:hover { transform: translateY(-4px); box-shadow: 0 24px 50px -28px rgba(28,25,23,.38); }
+  .nav-link { position: relative; }
+  .nav-link::after {
+    content: ""; position: absolute; left: 0; right: 0; bottom: -2px; height: 1px;
+    background: var(--gold); transform: scaleX(0); transform-origin: left;
+    transition: transform .3s ease;
+  }
+  .nav-link:hover::after { transform: scaleX(1); }
   
   /* Scrollbar */
   ::-webkit-scrollbar { width: 4px; }

@@ -13,9 +13,9 @@ const buttonVariants = cva(
         default:
           "bg-stone-900 text-stone-50 hover:bg-stone-800 shadow-sm",
         brand:
-          "bg-amber-600 text-white hover:bg-amber-500 shadow-sm shadow-amber-600/20",
+          "bg-[#C9A84C] text-stone-900 hover:bg-[#b8973f] shadow-sm shadow-amber-900/10",
         outline:
-          "border border-stone-300 bg-transparent text-stone-900 hover:bg-stone-50 hover:border-stone-400",
+          "border border-stone-400/70 bg-transparent text-stone-900 hover:bg-stone-900 hover:text-white hover:border-stone-900",
         ghost:
           "text-stone-600 hover:bg-stone-100 hover:text-stone-900",
         destructive:
