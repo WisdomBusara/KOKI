@@ -1,0 +1,27 @@
+# KOKI — systemd unit. Install as /etc/systemd/system/koki.service, then:
+#   sudo systemctl daemon-reload && sudo systemctl enable --now koki
+# Adjust WorkingDirectory, User, and the port to match the box.
+#
+# Next loads .env.production / .env.local from WorkingDirectory at start, so the
+# server-side secrets (MONGODB_URI, AUTH_SECRET, MPESA_*) live in that file, not
+# here. Remember NEXT_PUBLIC_* are baked in at BUILD time, not read here.
+
+[Unit]
+Description=KOKI (Next.js 16) storefront + admin
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+WorkingDirectory=/opt/koki
+Environment=NODE_ENV=production
+Environment=PORT=3010
+# Bind to loopback only; nginx is the public listener.
+ExecStart=/usr/bin/env npm run start -- -H 127.0.0.1 -p 3010
+Restart=always
+RestartSec=5
+User=www-data
+Group=www-data
+
+[Install]
+WantedBy=multi-user.target

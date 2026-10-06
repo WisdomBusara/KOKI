@@ -1,0 +1,107 @@
+@import "tailwindcss";
+@config "../../tailwind.config.ts";
+
+@layer base {
+  :root {
+    --background: 40 30% 97%;
+    --foreground: 25 15% 10%;
+    --card: 0 0% 100%;
+    --card-foreground: 25 15% 10%;
+    --border: 30 15% 88%;
+    --input: 30 15% 88%;
+    --ring: 38 75% 45%;
+    --primary: 38 75% 45%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 30 15% 94%;
+    --secondary-foreground: 25 15% 20%;
+    --muted: 30 15% 94%;
+    --muted-foreground: 25 10% 45%;
+    --accent: 38 75% 95%;
+    --accent-foreground: 38 75% 30%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 98%;
+    --radius: 0.75rem;
+    
+    /* Brand tokens */
+    --gold: #C9A84C;
+    --gold-light: #E2C87A;
+    --gold-dark: #9E7A2A;
+    --stone-warm: #8B7355;
+    --ink: #1C1917;
+  }
+
+  * { @apply border-border; }
+  
+  body {
+    @apply bg-stone-50 text-stone-900 antialiased;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply tracking-tight;
+  }
+}
+
+@layer utilities {
+  .text-balance { text-wrap: balance; }
+  
+  /* Gold shimmer */
+  .text-gold {
+    background: linear-gradient(135deg, #9E7A2A, #C9A84C, #E2C87A, #C9A84C);
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: shimmer-gold 4s linear infinite;
+  }
+  
+  /* Product card hover */
+  .product-card-img img {
+    transition: transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .product-card-img:hover img {
+    transform: scale(1.06);
+  }
+  
+  /* Subtle section divider */
+  .section-rule {
+    @apply w-10 h-px bg-amber-400/60;
+  }
+  
+  /* Scrollbar */
+  ::-webkit-scrollbar { width: 4px; }
+  ::-webkit-scrollbar-track { @apply bg-stone-100; }
+  ::-webkit-scrollbar-thumb { @apply bg-amber-300 rounded-full; }
+  
+  ::selection { @apply bg-amber-200 text-stone-900; }
+}
+
+/* Radix UI animation helpers */
+@layer utilities {
+  .animate-in { animation-duration: 200ms; animation-fill-mode: both; }
+  .animate-out { animation-duration: 150ms; animation-fill-mode: both; }
+  .fade-in-0 { --tw-enter-opacity: 0; }
+  .fade-out-0 { --tw-exit-opacity: 0; }
+  .zoom-in-95 { --tw-enter-scale: 0.95; }
+  .zoom-out-95 { --tw-exit-scale: 0.95; }
+  .slide-in-from-top-\[48\%\] { --tw-enter-translate-y: -48%; }
+  .slide-out-to-top-\[48\%\] { --tw-exit-translate-y: -48%; }
+  .slide-in-from-left-1\/2 { --tw-enter-translate-x: -50%; }
+  .slide-out-to-left-1\/2 { --tw-exit-translate-x: -50%; }
+}
+
+@keyframes shimmer-gold {
+  0%   { background-position: 0% center; }
+  100% { background-position: 200% center; }
+}
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes marquee {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.animate-fade-up { animation: fadeUp 0.6s cubic-bezier(0.22,1,0.36,1) forwards; }
+.animate-marquee { animation: marquee 40s linear infinite; }
