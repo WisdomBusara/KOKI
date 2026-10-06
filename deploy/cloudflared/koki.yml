@@ -1,0 +1,19 @@
+# cloudflared config for the KOKI tunnel. Install on the VPS at
+# /etc/cloudflared/koki.yml  — NOT /etc/cloudflared/config.yml (that's the SHARED
+# tunnel's config for the other projects; overwriting it takes them down).
+#
+# This is its own tunnel + its own service (deploy/cloudflared-koki.service), so
+# it never touches the shared cloudflared.service.
+#
+# Create the tunnel + DNS route once:
+#   cloudflared tunnel create koki
+#   cloudflared tunnel route dns --overwrite-dns <KOKI_TUNNEL_ID> koki.wisdombusara.com
+# then put its id + credentials file below.
+
+tunnel: <KOKI_TUNNEL_ID>                                   # e.g. e3b99c03-17f3-4d3a-9c22-cc6b4ad7f6b7
+credentials-file: /root/.cloudflared/<KOKI_TUNNEL_ID>.json  # created by `tunnel create`; keep secret, not in git
+
+ingress:
+  - hostname: koki.wisdombusara.com
+    service: http://localhost:3010     # the koki.service Next app
+  - service: http_status:404

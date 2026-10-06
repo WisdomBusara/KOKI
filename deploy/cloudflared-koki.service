@@ -1,0 +1,22 @@
+# Dedicated systemd service for the KOKI Cloudflare tunnel.
+# Install as /etc/systemd/system/cloudflared-koki.service:
+#   sudo cp deploy/cloudflared-koki.service /etc/systemd/system/
+#   sudo systemctl daemon-reload && sudo systemctl enable --now cloudflared-koki
+#
+# This is SEPARATE from the shared `cloudflared.service`. Do NOT run
+# `cloudflared service install` for koki — that clobbers the shared one.
+# Set ExecStart's binary to `command -v cloudflared` output if it isn't here.
+
+[Unit]
+Description=cloudflared tunnel (koki)
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+ExecStart=/usr/local/bin/cloudflared tunnel --no-autoupdate --config /etc/cloudflared/koki.yml run
+Restart=always
+RestartSec=5
+User=root
+
+[Install]
+WantedBy=multi-user.target
