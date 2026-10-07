@@ -9,6 +9,7 @@ import Navbar from "@/components/layout/Navbar";
 import FloatingWhatsApp from "@/components/layout/FloatingWhatsApp";
 import Footer from "@/components/layout/Footer";
 import ProductCard from "@/components/shop/ProductCard";
+import { Reveal } from "@/components/ui/motion";
 import { wa } from "@/lib/whatsapp";
 import { formatPrice } from "@/types";
 import { getAllProducts } from "@/lib/products";
@@ -132,15 +133,17 @@ export default async function HomePage() {
         {/* ─── FEATURED PRODUCTS ─────────────────────────────────────────── */}
         <section className="py-20 px-4 sm:px-6 bg-white">
           <div className="max-w-7xl mx-auto">
-            <div className="flex items-end justify-between mb-10">
-              <div>
-                <p className="text-xs uppercase tracking-widest text-amber-600 font-medium mb-2">Hand-Picked</p>
-                <h2 className="font-serif text-3xl sm:text-4xl font-semibold text-stone-900">Featured Picks</h2>
+            <Reveal>
+              <div className="flex items-end justify-between mb-10">
+                <div>
+                  <p className="text-xs uppercase tracking-widest text-amber-600 font-medium mb-2">Hand-Picked</p>
+                  <h2 className="font-serif text-3xl sm:text-4xl font-semibold text-stone-900">Featured Picks</h2>
+                </div>
+                <Button variant="outline" size="sm" asChild>
+                  <Link href="/shop">View all <ArrowRight className="h-3.5 w-3.5" /></Link>
+                </Button>
               </div>
-              <Button variant="outline" size="sm" asChild>
-                <Link href="/shop">View all <ArrowRight className="h-3.5 w-3.5" /></Link>
-              </Button>
-            </div>
+            </Reveal>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
               {FEATURED.map(p => (
@@ -153,10 +156,12 @@ export default async function HomePage() {
         {/* ─── CATEGORIES ─────────────────────────────────────────────── */}
         <section className="py-20 px-4 sm:px-6 bg-stone-50">
           <div className="max-w-7xl mx-auto">
-            <div className="text-center mb-12">
-              <p className="text-xs uppercase tracking-widest text-amber-600 font-medium mb-2">Everything You Need</p>
-              <h2 className="font-serif text-3xl sm:text-4xl font-semibold text-stone-900">Shop by Category</h2>
-            </div>
+            <Reveal>
+              <div className="text-center mb-12">
+                <p className="text-xs uppercase tracking-widest text-amber-600 font-medium mb-2">Everything You Need</p>
+                <h2 className="font-serif text-3xl sm:text-4xl font-semibold text-stone-900">Shop by Category</h2>
+              </div>
+            </Reveal>
 
             <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
               {[
@@ -182,12 +187,14 @@ export default async function HomePage() {
         {/* ─── REST OF PRODUCTS ───────────────────────────────────────── */}
         <section className="py-20 px-4 sm:px-6 bg-white">
           <div className="max-w-7xl mx-auto">
-            <div className="flex items-end justify-between mb-10">
-              <div>
-                <p className="text-xs uppercase tracking-widest text-amber-600 font-medium mb-2">The Collection</p>
-                <h2 className="font-serif text-3xl sm:text-4xl font-semibold text-stone-900">More Products</h2>
+            <Reveal>
+              <div className="flex items-end justify-between mb-10">
+                <div>
+                  <p className="text-xs uppercase tracking-widest text-amber-600 font-medium mb-2">The Collection</p>
+                  <h2 className="font-serif text-3xl sm:text-4xl font-semibold text-stone-900">More Products</h2>
+                </div>
               </div>
-            </div>
+            </Reveal>
             <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-5">
               {GRID.map(p => <ProductCard key={p.id} product={p} />)}
             </div>
@@ -223,10 +230,12 @@ export default async function HomePage() {
         {/* ─── TESTIMONIALS ──────────────────────────────────────────── */}
         <section className="py-20 px-4 sm:px-6 bg-stone-50">
           <div className="max-w-7xl mx-auto">
-            <div className="text-center mb-12">
-              <p className="text-xs uppercase tracking-widest text-amber-600 font-medium mb-2">Reviews</p>
-              <h2 className="font-serif text-3xl sm:text-4xl font-semibold text-stone-900">Worn &amp; Loved</h2>
-            </div>
+            <Reveal>
+              <div className="text-center mb-12">
+                <p className="text-xs uppercase tracking-widest text-amber-600 font-medium mb-2">Reviews</p>
+                <h2 className="font-serif text-3xl sm:text-4xl font-semibold text-stone-900">Worn &amp; Loved</h2>
+              </div>
+            </Reveal>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               {[
                 { name: "Amara N.", loc: "Westlands", text: "Midnight Oud Reserve is everything. More compliments in two weeks than the past two years combined.", product: "Midnight Oud Reserve" },
