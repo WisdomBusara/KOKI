@@ -10,6 +10,14 @@ interface CallbackItem {
 
 /** Safaricom posts the STK result here. Always answer 200 so it doesn't retry. */
 export async function POST(req: Request) {
+  // Only Safaricom knows the registered callback URL. Requiring a secret token on
+  // it stops forged "paid" callbacks from marking orders paid without payment.
+  // Register the callback as .../api/mpesa/callback?token=<MPESA_CALLBACK_SECRET>.
+  const secret = process.env.MPESA_CALLBACK_SECRET;
+  if (secret && new URL(req.url).searchParams.get("token") !== secret) {
+    return NextResponse.json({ ResultCode: 0, ResultDesc: "Accepted" });
+  }
+
   try {
     const body = await req.json().catch(() => null);
     const cb = body?.Body?.stkCallback;
